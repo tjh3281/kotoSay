@@ -68,7 +68,8 @@ class TtsService(context: Context) {
      * Speak [text] in [language]. Interrupts any ongoing speech.
      *
      * If the requested voice is unavailable this speaks [fallbackText] (the
-     * Malay rendering) instead.
+     * [Language.DISPLAY] rendering) in that language instead, and only if that
+     * voice is missing too does it fall back to the Malay voice.
      *
      * [emotion] shifts pitch and rate. It is a coarse effect — the on-device
      * engine has no emotion API at all, so this is the only lever available —
@@ -98,8 +99,17 @@ class TtsService(context: Context) {
             return
         }
 
-        // Requested voice not installed — say the Malay version instead.
-        Log.w(TAG, "${language.menuLabel} TTS unavailable, speaking Malay instead")
+        // Requested voice not installed — say the display-language version.
+        val display = Language.DISPLAY
+        if (language != display && isUsable(engine.setLanguage(display.locale))) {
+            Log.w(TAG, "${language.englishName} TTS unavailable, speaking ${display.englishName} instead")
+            if (fallbackText.isNotBlank()) {
+                engine.speak(fallbackText, TextToSpeech.QUEUE_FLUSH, null, "isuara_tts")
+            }
+            return
+        }
+
+        Log.w(TAG, "${language.englishName} and ${display.englishName} TTS unavailable, using the Malay voice")
         applyMalay()
         if (fallbackText.isNotBlank()) {
             engine.speak(fallbackText, TextToSpeech.QUEUE_FLUSH, null, "isuara_tts")

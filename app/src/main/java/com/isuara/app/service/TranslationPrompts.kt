@@ -18,8 +18,8 @@ object TranslationPrompts {
         1. Rearrange and expand the BIM keywords (glosses) into a natural Bahasa Melayu sentence (Subject + Verb + Object).
         2. Infer context and add implied verbs (e.g., "rasa," "mahu"), emotions (e.g., "Gembira", "Sedih", "Kecewa", "Maaf") and grammatical particles.
         3. If a phrase is ambiguous, default to the most direct, standard interpretation.
-        4. Produce THE SAME sentence in four languages: Bahasa Melayu, English, Simplified Chinese, and Tamil.
-        5. Write Tamil in Tamil script, not romanised.
+        4. Produce THE SAME sentence in five languages: Bahasa Melayu, English, Simplified Chinese, Tamil, and Japanese.
+        5. Write Tamil in Tamil script, not romanised. Write Japanese in natural Japanese script (kanji and kana), not romaji.
         6. Each language must be ONE single sentence. Do NOT explain your process.
 
         The input may include the signer's observed facial expression. In sign
@@ -32,22 +32,22 @@ object TranslationPrompts {
            high-arousal (fear, anger, urgency, surprise), switch to the natural
            colloquial Malaysian a person would actually shout — "Cepat!",
            "Tolong sikit!", "Jom lah!" — rather than textbook phrasing. Apply the
-           same shift in register to the English, Chinese and Tamil sentences so
-           all four stay consistent with each other.
+           same shift in register to the English, Chinese, Tamil and Japanese
+           sentences so all five stay consistent with each other.
         9. Also return two extra fields: "emotion", the tone you rendered, in one
            English word; and "style", a one-sentence ENGLISH instruction to a
            voice actor describing how to deliver the Malay sentence.
 
         Return ONLY a single JSON object. No markdown, no code fences, no commentary, no reasoning:
-        {"ms": "<Bahasa Melayu>", "en": "<English>", "zh": "<Simplified Chinese>", "ta": "<Tamil>", "emotion": "<one English word>", "style": "<one English sentence>"}
+        {"ms": "<Bahasa Melayu>", "en": "<English>", "zh": "<Simplified Chinese>", "ta": "<Tamil>", "ja": "<Japanese>", "emotion": "<one English word>", "style": "<one English sentence>"}
 
         Examples:
         Input: [Polis, Siapa, Salah]
-        Output: {"ms": "Siapa yang polis salahkan tadi?", "en": "Who did the police blame just now?", "zh": "警察刚才怪谁?", "ta": "காவல்துறை யாரை குற்றம் சாட்டியது?", "emotion": "neutral", "style": "Say this calmly and clearly, as a straightforward question."}
+        Output: {"ms": "Siapa yang polis salahkan tadi?", "en": "Who did the police blame just now?", "zh": "警察刚才怪谁?", "ta": "காவல்துறை யாரை குற்றம் சாட்டியது?", "ja": "さっき警察は誰のせいにしたの？", "emotion": "neutral", "style": "Say this calmly and clearly, as a straightforward question."}
 
         Input: [Tolong, Polis, Cepat]
         Observed facial expression: fear (high arousal)
-        Output: {"ms": "Tolong! Panggil polis, cepat!", "en": "Help! Call the police, quick!", "zh": "救命!快叫警察!", "ta": "உதவி! சீக்கிரம் போலீஸை கூப்பிடுங்கள்!", "emotion": "fear", "style": "Say this urgently and fearfully, fast and loud, with a strained voice."}
+        Output: {"ms": "Tolong! Panggil polis, cepat!", "en": "Help! Call the police, quick!", "zh": "救命!快叫警察!", "ta": "உதவி! சீக்கிரம் போலீஸை கூப்பிடுங்கள்!", "ja": "助けて！早く警察を呼んで！", "emotion": "fear", "style": "Say this urgently and fearfully, fast and loud, with a strained voice."}
     """.trimIndent()
 
     /**

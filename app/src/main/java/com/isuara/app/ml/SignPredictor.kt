@@ -75,8 +75,9 @@ class SignPredictor(
             for (gloss in labels) {
                 val entry = translationsObj.optJSONObject(gloss) ?: continue
                 val byLang = mutableMapOf<String, String>()
-                entry.optString("en").takeIf { it.isNotBlank() }?.let { byLang["en"] = it }
-                entry.optString("zh").takeIf { it.isNotBlank() }?.let { byLang["zh"] = it }
+                for (key in Language.entries.mapNotNull { it.labelMapKey }) {
+                    entry.optString(key).takeIf { it.isNotBlank() }?.let { byLang[key] = it }
+                }
                 if (byLang.isNotEmpty()) parsed[gloss] = byLang
             }
         }
@@ -84,18 +85,21 @@ class SignPredictor(
     }
 
     /**
-     * The gloss rendered in [language], or null when nothing extra should be
-     * shown: Malay is canonical, "Idle" is a control-flow sentinel rather than a
-     * sign, and an unmapped gloss should render no second row at all.
+     * The gloss rendered in [language] — for Malay, the gloss itself — or null
+     * when there is nothing to render: "Idle" is a control-flow sentinel rather
+     * than a sign, and an unmapped gloss has no translation. Callers fall back
+     * to the raw gloss on null.
      *
      * Callers keep the Malay gloss as the value they store and send onward —
      * this is display only.
      */
     fun glossIn(gloss: String, language: Language): String? {
-        val key = language.labelMapKey ?: return null
-        if (gloss == IDLE) return null
         // updatePrediction appends "?" to a low-confidence word for display.
         val clean = gloss.removeSuffix("?")
+        // Checked after the strip so a low-confidence "Idle?" stays English too.
+        if (clean == IDLE) return null
+        // The gloss already is the Malay word.
+        val key = language.labelMapKey ?: return gloss
         val translated = glossTranslations[clean]?.get(key) ?: return null
         return if (clean == gloss) translated else "$translated?"
     }

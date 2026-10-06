@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.StateFlow
 /**
  * One sentence rendered in every supported language.
  *
- * The translator returns all four in a single call, so switching the display
+ * The translator returns all five in a single call, so switching the display
  * language afterwards is instant and costs nothing.
  */
 data class Translation(
@@ -14,6 +14,7 @@ data class Translation(
     val en: String,
     val zh: String,
     val ta: String,
+    val ja: String,
     /**
      * The tone the model judged it was rendering, in its own words.
      *
@@ -36,13 +37,35 @@ data class Translation(
         Language.ENGLISH -> en
         Language.MANDARIN -> zh
         Language.TAMIL -> ta
+        Language.JAPANESE -> ja
     }
 
 
     companion object {
         /** Fallback used when no translator is configured or the call fails. */
         fun ofRawGlosses(text: String) =
-            Translation(ms = text, en = text, zh = text, ta = text)
+            Translation(ms = text, en = text, zh = text, ta = text, ja = text)
+
+        /**
+         * Fallback that keeps the selected language when Gemini is unreachable:
+         * each gloss rendered word by word via [glossIn], so a Japanese user
+         * hears Japanese words rather than Malay. Not a sentence, but the right
+         * language. A gloss with no mapping stays in Malay.
+         */
+        fun ofGlosses(
+            words: List<String>,
+            glossIn: (String, Language) -> String?,
+        ): Translation {
+            fun render(language: Language, separator: String) =
+                words.joinToString(separator) { glossIn(it, language) ?: it }
+            return Translation(
+                ms = words.joinToString(" "),
+                en = render(Language.ENGLISH, " "),
+                zh = render(Language.MANDARIN, "、"),
+                ta = render(Language.TAMIL, " "),
+                ja = render(Language.JAPANESE, "、"),
+            )
+        }
     }
 }
 

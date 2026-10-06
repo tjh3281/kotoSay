@@ -8,7 +8,7 @@ object SignGrammarPrompt {
 
     val SYSTEM = """
         You are an expert in Bahasa Isyarat Malaysia (BIM) sign language grammar.
-        Convert a natural spoken sentence (in Malay, English, Mandarin, or Tamil) into the correct sequence of BIM sign glosses for 3D sign avatar synthesis.
+        Convert a natural spoken sentence (in Malay, English, Mandarin, Tamil, or Japanese) into the correct sequence of BIM sign glosses for 3D sign avatar synthesis.
         Translate non-Malay input concepts into standard Malaysian Sign Language (BIM) concept glosses (in Malay gloss format).
 
         Linguistic Rules:

@@ -9,7 +9,7 @@ import java.net.URL
 import java.util.concurrent.atomic.AtomicInteger
 
 /**
- * The single text-generation path for the whole app: Gemini 3.8 Flash.
+ * The single text-generation path for the whole app.
  *
  * Plain HttpURLConnection against the REST endpoint, the same transport
  * [GeminiTtsService] uses, so the app carries no SDK for one POST.
@@ -18,17 +18,34 @@ import java.util.concurrent.atomic.AtomicInteger
  * local.properties, shared with the TTS service. They rotate per call, and a
  * failing key falls through to the next, because a per-key quota 429 is the
  * dominant failure on the free tier and a different key usually succeeds.
+ *
+ * Models are tried in [MODELS] order. A 503 means the model itself is
+ * overloaded for everyone, so no other key can help — the client moves
+ * straight to the next model instead of burning a round trip per key.
  */
 object GeminiClient {
 
     private const val TAG = "GeminiClient"
 
-    const val MODEL = "gemini-3.8-flash"
+    /**
+     * Preferred first. 3.8 Flash returned 503 "high demand" on every key for
+     * long stretches while 3.6 and 3.5 Flash answered in about 1.5s.
+     */
+    val MODELS = listOf("gemini-3.8-flash", "gemini-3.6-flash", "gemini-3.5-flash")
+
+    /** The model that served the most recent successful call, for logs and UI. */
+    @Volatile
+    var lastModel: String? = null
+        private set
 
     private const val ENDPOINT =
         "https://generativelanguage.googleapis.com/v1beta/models/%s:generateContent"
 
-    private const val TIMEOUT_MS = 30_000
+    /** Bounds the worst case across the whole model chain. */
+    private const val TIMEOUT_MS = 15_000
+
+    /** The model is overloaded for every caller; another key will not help. */
+    private class Overloaded(message: String) : IllegalStateException(message)
 
     val apiKeys: List<String> = BuildConfig.GEMINI_API_KEYS
         .split(",").map { it.trim() }.filter { it.isNotEmpty() }
@@ -43,25 +60,38 @@ object GeminiClient {
      * Asks for `application/json` output, so the reply is the bare object the
      * prompt describes rather than prose around it. Blocking: call from IO.
      *
-     * @throws IllegalStateException if no key is configured or every key failed.
+     * @throws IllegalStateException if no key is configured or every model and
+     *   key failed.
      */
     fun complete(system: String, user: String): String {
         check(apiKeys.isNotEmpty()) { "GEMINI_API_KEY is not configured" }
 
         var lastError: Exception? = null
-        repeat(apiKeys.size) {
-            val key = apiKeys[nextKey.getAndIncrement().mod(apiKeys.size)]
-            try {
-                return request(system, user, key)
-            } catch (e: Exception) {
-                lastError = e
-                Log.w(TAG, "Gemini call failed, trying next key: ${e.message}")
+        for (model in MODELS) {
+            for (attempt in apiKeys.indices) {
+                val key = apiKeys[nextKey.getAndIncrement().mod(apiKeys.size)]
+                try {
+                    val text = request(model, system, user, key)
+                    lastModel = model
+                    Log.i(TAG, "Gemini [$model] ok")
+                    return text
+                } catch (e: Overloaded) {
+                    lastError = e
+                    Log.w(TAG, "$model overloaded, trying next model: ${e.message}")
+                    break
+                } catch (e: Exception) {
+                    lastError = e
+                    Log.w(TAG, "$model call failed, trying next key: ${e.message}")
+                }
             }
         }
-        throw IllegalStateException("all ${apiKeys.size} Gemini key(s) failed", lastError)
+        throw IllegalStateException(
+            "all ${MODELS.size} Gemini model(s) and ${apiKeys.size} key(s) failed",
+            lastError,
+        )
     }
 
-    private fun request(system: String, user: String, apiKey: String): String {
+    private fun request(model: String, system: String, user: String, apiKey: String): String {
         val body = JSONObject().apply {
             put("systemInstruction", JSONObject().put(
                 "parts", JSONArray().put(JSONObject().put("text", system)),
@@ -73,7 +103,7 @@ object GeminiClient {
             put("generationConfig", JSONObject().put("responseMimeType", "application/json"))
         }.toString()
 
-        val connection = (URL(ENDPOINT.format(MODEL)).openConnection() as HttpURLConnection).apply {
+        val connection = (URL(ENDPOINT.format(model)).openConnection() as HttpURLConnection).apply {
             requestMethod = "POST"
             connectTimeout = TIMEOUT_MS
             readTimeout = TIMEOUT_MS
@@ -87,7 +117,9 @@ object GeminiClient {
             val code = connection.responseCode
             if (code != HttpURLConnection.HTTP_OK) {
                 val detail = connection.errorStream?.bufferedReader()?.use { it.readText() }.orEmpty()
-                throw IllegalStateException("HTTP $code: ${detail.take(180)}")
+                val message = "HTTP $code: ${detail.take(180)}"
+                if (code == HttpURLConnection.HTTP_UNAVAILABLE) throw Overloaded(message)
+                throw IllegalStateException(message)
             }
             val reply = connection.inputStream.bufferedReader().use { it.readText() }
             return extractText(reply)

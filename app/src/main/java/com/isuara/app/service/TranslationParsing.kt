@@ -62,7 +62,7 @@ object TranslationParsing {
     }
 
     /**
-     * Pulls the four-language translation out of a raw model reply.
+     * Pulls the five-language translation out of a raw model reply.
      *
      * The `emotion` and `style` keys are deliberately NOT required. They are an
      * enrichment: a model that omits them, or that predates the prompt asking
@@ -70,7 +70,7 @@ object TranslationParsing {
      * a cosmetic shortfall into a total failure.
      *
      * @throws IllegalArgumentException if no complete object is present or any
-     *   of the four languages is missing or blank.
+     *   of the five languages is missing or blank.
      */
     fun extractTranslation(raw: String): Translation {
         val obj = parse(raw, "reply")
@@ -78,15 +78,19 @@ object TranslationParsing {
         val en = obj.optString("en").trim()
         val zh = obj.optString("zh").trim()
         val ta = obj.optString("ta").trim()
-        require(ms.isNotEmpty() && en.isNotEmpty() && zh.isNotEmpty() && ta.isNotEmpty()) {
+        val ja = obj.optString("ja").trim()
+        require(
+            ms.isNotEmpty() && en.isNotEmpty() && zh.isNotEmpty() && ta.isNotEmpty() && ja.isNotEmpty()
+        ) {
             "missing language in reply: ms=${ms.isNotEmpty()} en=${en.isNotEmpty()} " +
-                "zh=${zh.isNotEmpty()} ta=${ta.isNotEmpty()}"
+                "zh=${zh.isNotEmpty()} ta=${ta.isNotEmpty()} ja=${ja.isNotEmpty()}"
         }
         return Translation(
             ms = ms,
             en = en,
             zh = zh,
             ta = ta,
+            ja = ja,
             emotion = obj.optString("emotion").trim().ifEmpty { null },
             style = obj.optString("style").trim().ifEmpty { null },
         )

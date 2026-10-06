@@ -44,7 +44,7 @@ class SpeechRouter(
      * Speak [text] in [language], delivered per [emotion].
      *
      * Returns immediately; synthesis happens off the main thread. [fallbackText]
-     * is the Malay rendering, used when the requested on-device voice is not
+     * is the [Language.DISPLAY] rendering, used when the requested on-device voice is not
      * installed — the same contract [TtsService.speak] already has.
      */
     fun speak(

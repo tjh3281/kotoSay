@@ -179,12 +179,12 @@ class MainActivity : ComponentActivity() {
                                         translator = translator,
                                         speech = speech,
                                         emotionTracker = emotionTracker,
-                                        initialLanguage = languagePrefs?.get() ?: Language.MALAY,
+                                        initialLanguage = languagePrefs?.get() ?: Language.JAPANESE,
                                         onLanguageChange = { languagePrefs?.set(it) }
                                     )
                                 } else {
                                     com.isuara.app.avatar.ui.AvatarPlayerScreen(
-                                        initialLanguage = languagePrefs?.get() ?: Language.MALAY,
+                                        initialLanguage = languagePrefs?.get() ?: Language.JAPANESE,
                                         onLanguageChange = { languagePrefs?.set(it) }
                                     )
                                 }

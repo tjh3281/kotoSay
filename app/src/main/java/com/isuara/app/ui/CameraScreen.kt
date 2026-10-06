@@ -61,7 +61,7 @@ fun CameraScreen(
     translator: Translator?,
     speech: SpeechRouter,
     emotionTracker: EmotionTracker? = null,
-    initialLanguage: Language = Language.MALAY,
+    initialLanguage: Language = Language.JAPANESE,
     onLanguageChange: (Language) -> Unit = {}
 ) {
     val context = LocalContext.current
@@ -115,27 +115,29 @@ fun CameraScreen(
                 spokenEmotion = sentenceEmotion
 
                 try {
-                    val rawSentence = words.joinToString(" ")
-                    // No translator configured falls back to the raw Malay
-                    // glosses. A real failure throws into the catch below.
+                    // No translator configured falls back to the glosses
+                    // rendered word by word. A real failure throws into the
+                    // catch below.
                     val result = translator?.translate(words, sentenceEmotion)
-                        ?: Translation.ofRawGlosses(rawSentence)
+                        ?: Translation.ofGlosses(words, signPredictor::glossIn)
                     translation = result
 
                     // Speak only the selected language; the router falls back to
-                    // the Malay rendering if that voice is not installed.
+                    // the Japanese rendering if that voice is not installed.
                     val spoken = result.forLanguage(language)
                     if (spoken.isNotEmpty()) {
-                        speech.speak(spoken, language, result.ms, sentenceEmotion)
+                        speech.speak(spoken, language, result.ja, sentenceEmotion)
                     }
                 } catch (e: Exception) {
-                    // If the translator throws (e.g., no internet), fall back to
-                    // the raw glosses, which are Malay — so speak them as Malay.
-                    // The emotion still applies: how it is said does not depend
-                    // on the translator having succeeded.
-                    val rawSentence = words.joinToString(" ")
-                    translation = Translation.ofRawGlosses(rawSentence)
-                    speech.speak(rawSentence, Language.MALAY, rawSentence, sentenceEmotion)
+                    // If the translator throws (e.g., no internet or every model
+                    // overloaded), fall back to the glosses word by word in the
+                    // selected language. The speech router still falls back to
+                    // the Japanese words if that voice is not installed. The
+                    // emotion still applies: how it is said does not depend on
+                    // the translator having succeeded.
+                    val fallback = Translation.ofGlosses(words, signPredictor::glossIn)
+                    translation = fallback
+                    speech.speak(fallback.forLanguage(language), language, fallback.ja, sentenceEmotion)
                     Log.e(TAG, "Auto-translate error, falling back to raw text", e)
                 } finally {
                     isTranslating = false
@@ -342,7 +344,9 @@ fun CameraScreen(
                 .padding(horizontal = 16.dp, vertical = 8.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Box(modifier = Modifier.height(44.dp), contentAlignment = Alignment.Center) {
+            // Fixed so the panel below does not jump as words come and go; tall
+            // enough for a CJK headline plus the selected-language line.
+            Box(modifier = Modifier.height(58.dp), contentAlignment = Alignment.Center) {
                 val isWordActive = predictionState.currentWord.isNotEmpty() && predictionState.currentWord != SignPredictor.IDLE
                 androidx.compose.animation.AnimatedVisibility(
                     visible = isWordActive,
@@ -350,21 +354,28 @@ fun CameraScreen(
                     exit = fadeOut()
                 ) {
                     val textColor by animateColorAsState(if (predictionState.isConfident) Color(0xFF4CAF50) else Color.White.copy(alpha = 0.85f), label = "color")
+                    // Japanese always leads; the selected language sits beneath
+                    // it. Unmapped glosses and "Idle" stay as they are.
+                    val word = predictionState.currentWord
+                    val headline = signPredictor.glossIn(word, Language.DISPLAY) ?: word
+                    val secondary = if (language.isSecondary) signPredictor.glossIn(word, language) else null
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         Text(
-                            text = predictionState.currentWord.uppercase(),
+                            text = headline.uppercase(),
                             fontFamily = googleSansFlex,
                             color = textColor,
                             fontSize = 20.sp,
+                            lineHeight = 24.sp,
                             fontWeight = FontWeight.Black,
                             letterSpacing = 2.sp
                         )
-                        signPredictor.glossIn(predictionState.currentWord, language)?.let { translated ->
+                        if (secondary != null) {
                             Text(
-                                text = translated,
+                                text = secondary,
                                 fontFamily = googleSansFlex,
                                 color = textColor.copy(alpha = 0.65f),
                                 fontSize = 13.sp,
+                                lineHeight = 16.sp,
                                 fontWeight = FontWeight.Medium,
                                 letterSpacing = 1.sp
                             )
@@ -383,7 +394,10 @@ fun CameraScreen(
 
             Spacer(modifier = Modifier.height(8.dp))
 
-            val displaySentence = predictionState.sentence.joinToString(" ")
+            val displaySentence = predictionState.sentence
+                .joinToString(" ") { signPredictor.glossIn(it, Language.DISPLAY) ?: it }
+            val secondarySentence = predictionState.sentence
+                .joinToString(" ") { signPredictor.glossIn(it, language) ?: it }
 
             Surface(
                 color = Color.White.copy(alpha = 0.1f),
@@ -408,11 +422,8 @@ fun CameraScreen(
 
                     // Second row of glosses in the selected language.
                     if (displaySentence.isNotEmpty() && language.isSecondary) {
-                        val translatedGlosses = predictionState.sentence
-                            .map { signPredictor.glossIn(it, language) ?: it }
-                            .joinToString(" ")
                         Text(
-                            text = translatedGlosses,
+                            text = secondarySentence,
                             fontFamily = googleSansFlex,
                             color = Color.White.copy(alpha = 0.65f),
                             fontSize = 15.sp,
@@ -454,7 +465,7 @@ fun CameraScreen(
                                     val emojiSuffix = if (emoji != null) " $emoji" else ""
 
                                     Text(
-                                        text = "${t.ms}$emojiSuffix",
+                                        text = "${t.forLanguage(Language.DISPLAY)}$emojiSuffix",
                                         fontFamily = googleSansFlex,
                                         color = Color(0xFF64B5F6),
                                         fontSize = 18.sp,
@@ -464,7 +475,7 @@ fun CameraScreen(
                                     )
                                     if (language.isSecondary) {
                                         Text(
-                                            text = "${t.forLanguage(language)}$emojiSuffix",
+                                            text = t.forLanguage(language),
                                             fontFamily = googleSansFlex,
                                             color = Color(0xFF64B5F6).copy(alpha = 0.75f),
                                             fontSize = 15.sp,
@@ -557,19 +568,20 @@ fun CameraScreen(
                             spokenEmotion = sentenceEmotion
                             scope.launch {
                                 try {
-                                    val rawSentence = words.joinToString(" ")
                                     val result = translator?.translate(words, sentenceEmotion)
-                                        ?: Translation.ofRawGlosses(rawSentence)
+                                        ?: Translation.ofGlosses(words, signPredictor::glossIn)
                                     translation = result
 
                                     val spoken = result.forLanguage(language)
                                     if (spoken.isNotEmpty()) {
-                                        speech.speak(spoken, language, result.ms, sentenceEmotion)
+                                        speech.speak(spoken, language, result.ja, sentenceEmotion)
                                     }
                                 } catch (e: Exception) {
-                                    val rawSentence = words.joinToString(" ")
-                                    translation = Translation.ofRawGlosses(rawSentence)
-                                    speech.speak(rawSentence, Language.MALAY, rawSentence, sentenceEmotion)
+                                    val fallback = Translation.ofGlosses(words, signPredictor::glossIn)
+                                    translation = fallback
+                                    speech.speak(
+                                        fallback.forLanguage(language), language, fallback.ja, sentenceEmotion,
+                                    )
                                     Log.e(TAG, "Manual translate error", e)
                                 } finally {
                                     isTranslating = false
@@ -600,13 +612,13 @@ fun CameraScreen(
                         val current = translation
                         if (current != null) {
                             speech.speak(
-                                current.forLanguage(language), language, current.ms, spokenEmotion,
+                                current.forLanguage(language), language, current.ja, spokenEmotion,
                             )
-                        } else {
-                            val raw = predictionState.sentence.joinToString(" ")
-                            if (raw.isNotEmpty()) {
-                                speech.speak(raw, Language.MALAY, raw, spokenEmotion)
-                            }
+                        } else if (predictionState.sentence.isNotEmpty()) {
+                            // Nothing translated yet: read the detected words
+                            // out in Japanese, the display language.
+                            val raw = Translation.ofGlosses(predictionState.sentence, signPredictor::glossIn)
+                            speech.speak(raw.ja, Language.DISPLAY, raw.ja, spokenEmotion)
                         }
                     },
                     modifier = Modifier.size(uniformButtonHeight),

@@ -12,7 +12,9 @@ class LanguagePreference(context: Context) {
 
     private companion object {
         const val PREFS = "isuara_prefs"
-        const val KEY_LANGUAGE = "display_language"
+        // Bumped from "display_language" when Japanese became the default, so
+        // installs that had already saved Malay start in Japanese once.
+        const val KEY_LANGUAGE = "display_language_v2"
     }
 
     private val prefs = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)

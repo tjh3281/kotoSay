@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.withContext
 
 /**
- * GeminiTranslator — the four-language translation from one Gemini call.
+ * GeminiTranslator — the five-language translation from one Gemini call.
  *
  * Failures propagate as exceptions — callers distinguish them from a real
  * translation by catching, not by inspecting the returned text.
@@ -41,7 +41,7 @@ class GeminiTranslator : Translator {
                         TranslationPrompts.userTurn(words, emotion),
                     )
                     val translation = TranslationParsing.extractTranslation(raw)
-                    Log.i(TAG, "Translation [${GeminiClient.MODEL}] $words -> ${translation.ms}")
+                    Log.i(TAG, "Translation [${GeminiClient.lastModel}] $words -> ${translation.ms}")
                     return@withContext translation
                 } catch (e: IllegalArgumentException) {
                     lastError = e

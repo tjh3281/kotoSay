@@ -105,7 +105,7 @@ class GeminiTtsService(
     private fun buildPrompt(text: String, language: Language, emotion: EmotionReading?): String {
         val style = emotion?.label?.styleDirective
             ?: "Say this in a calm, clear, matter-of-fact voice."
-        return "Speak the following in ${language.menuLabel}. $style: $text"
+        return "Speak the following in ${language.englishName}. $style: $text"
     }
 
     private fun requestAudio(prompt: String, apiKey: String): ByteArray? {

@@ -31,7 +31,7 @@ class GeminiSignGrammarService {
         try {
             val raw = GeminiClient.complete(
                 SignGrammarPrompt.SYSTEM,
-                SignGrammarPrompt.userTurn(sentence, language.menuLabel),
+                SignGrammarPrompt.userTurn(sentence, language.englishName),
             )
             parse(raw)
         } catch (e: Exception) {
@@ -72,7 +72,7 @@ class GeminiSignGrammarService {
             reasoning = obj.optString("reasoning", "Restructured according to BIM Topic-Comment grammar."),
             tokens = tokens,
             displayTokens = display,
-            model = "Gemini 3.8 Flash",
+            model = GeminiClient.lastModel ?: "Gemini",
         )
     }
 

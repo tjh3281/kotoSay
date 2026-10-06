@@ -42,7 +42,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun AvatarPlayerScreen(
     motionPlayer: MotionPlayer = remember { MotionPlayer() },
-    initialLanguage: Language = Language.MALAY,
+    initialLanguage: Language = Language.JAPANESE,
     onLanguageChange: (Language) -> Unit = {}
 ) {
     val context = LocalContext.current
@@ -394,6 +394,7 @@ fun AvatarPlayerScreen(
                                 Language.ENGLISH -> "Type text or sentence"
                                 Language.MANDARIN -> "输入文字或句子"
                                 Language.TAMIL -> "உரை அல்லது வாக்கியத்தை தட்டச்சு செய்க"
+                                Language.JAPANESE -> "テキストまたは文を入力"
                             },
                             fontSize = 12.sp,
                             color = Color(0xFF8B949E)
