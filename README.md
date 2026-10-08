@@ -8,7 +8,7 @@ _(Note: Ensure you allow "Install from unknown sources" on your Android device t
 
 ## 1. Repository Overview & Team Introduction
 
-Welcome to the official repository for **iSuara**, an Edge-AI application built to provide real-time, pocket-sized translation of sign language into Malay, English, Mandarin and Tamil. This repository contains the complete Android Studio project — native Kotlin UI, MediaPipe vision extractors, LiteRT inference pipeline, and the Gemini 3.8 Flash translation layer.
+Welcome to the official repository for **iSuara**, an Edge-AI application built to provide real-time, pocket-sized translation of sign language into Japanese, Malay, English, Mandarin and Tamil. This repository contains the complete Android Studio project — native Kotlin UI, MediaPipe vision extractors, LiteRT inference pipeline, and the Gemini 3.8 Flash translation layer.
 
 ---
 
@@ -30,7 +30,7 @@ iSuara is built to advance the United Nations Sustainable Development Goals:
 
 ### Short Description
 
-iSuara is a real-time application that bridges the communication gap between the Deaf community and the hearing public. It uses on-device Edge Machine Learning to track 98 signs via the smartphone camera, then sends the detected glosses to Gemini 3.8 Flash, which restructures them into a natural sentence. The result is rendered in Malay, English, Mandarin and Tamil, and spoken aloud in whichever the user selects. A 3D avatar signs replies back, making the exchange a conversation rather than a one-way readout.
+iSuara is a real-time application that bridges the communication gap between the Deaf community and the hearing public. It uses on-device Edge Machine Learning to track 98 signs via the smartphone camera, then sends the detected glosses to Gemini 3.8 Flash, which restructures them into a natural sentence. The result is rendered in Japanese, Malay, English, Mandarin and Tamil, and spoken aloud in whichever the user selects. A 3D avatar signs replies back, making the exchange a conversation rather than a one-way readout.
 
 ---
 

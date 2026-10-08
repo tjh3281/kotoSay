@@ -28,10 +28,11 @@ object GeminiClient {
     private const val TAG = "GeminiClient"
 
     /**
-     * Preferred first. 3.8 Flash returned 503 "high demand" on every key for
-     * long stretches while 3.6 and 3.5 Flash answered in about 1.5s.
+     * Preferred first. The Lite models lead: 3.8 Flash returned 503 "high
+     * demand" on every key for long stretches, and the full Flash models were
+     * slower or timed out while the Lite ones answered in about 2-4s.
      */
-    val MODELS = listOf("gemini-3.8-flash", "gemini-3.6-flash", "gemini-3.5-flash")
+    val MODELS = listOf("gemini-3.5-flash-lite", "gemini-3.1-flash-lite", "gemini-3.6-flash")
 
     /** The model that served the most recent successful call, for logs and UI. */
     @Volatile
