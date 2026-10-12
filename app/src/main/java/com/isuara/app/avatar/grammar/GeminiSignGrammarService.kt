@@ -16,7 +16,7 @@ class GeminiSignGrammarService {
 
     companion object {
         private const val TAG = "GeminiSignGrammar"
-        private const val FALLBACK_MODEL = "BIM Linguistic Engine (offline)"
+        private const val FALLBACK_MODEL = "Offline sign grammar"
     }
 
     suspend fun restructure(
@@ -64,12 +64,16 @@ class GeminiSignGrammarService {
                 val d = displayJson.optString(i).trim()
                 if (d.isNotEmpty()) display.add(d)
             }
-        } else {
+        }
+        // The chips pair one-to-one with the clips the avatar plays; a reply
+        // whose display list drifted out of step falls back to the glosses.
+        if (display.size != tokens.size) {
+            display.clear()
             display.addAll(tokens.map { it.replaceFirstChar { c -> c.uppercase() } })
         }
 
         return SignGrammarResult(
-            reasoning = obj.optString("reasoning", "Restructured according to BIM Topic-Comment grammar."),
+            reasoning = obj.optString("reasoning", "Restructured according to sign language Topic-Comment grammar."),
             tokens = tokens,
             displayTokens = display,
             model = GeminiClient.lastModel ?: "Gemini",
@@ -92,9 +96,9 @@ class GeminiSignGrammarService {
         }
 
         val reasoning = if (qWord != null) {
-            "BIM Question Syntax: Question marker [${qWord.uppercase()}] shifted to sentence end, spoken glue particles dropped, and Topic-Comment order applied."
+            "Sign language question syntax: Question marker [${qWord.uppercase()}] shifted to sentence end, spoken glue particles dropped, and Topic-Comment order applied."
         } else {
-            "BIM Topic-Comment Syntax: Spoken glue particles dropped and core topic concepts prioritized."
+            "Sign language Topic-Comment syntax: Spoken glue particles dropped and core topic concepts prioritized."
         }
 
         return SignGrammarResult(

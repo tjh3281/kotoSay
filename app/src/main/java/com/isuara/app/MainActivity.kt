@@ -10,6 +10,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -172,6 +173,10 @@ class MainActivity : ComponentActivity() {
                                 modifier = Modifier
                                     .fillMaxSize()
                                     .padding(innerPadding)
+                                    // The bottom bar already covers the system
+                                    // navigation bar; consuming it here keeps
+                                    // screens' imePadding from lifting by it twice.
+                                    .consumeWindowInsets(innerPadding)
                             ) {
                                 if (currentTab == 0) {
                                     CameraScreen(
@@ -179,12 +184,12 @@ class MainActivity : ComponentActivity() {
                                         translator = translator,
                                         speech = speech,
                                         emotionTracker = emotionTracker,
-                                        initialLanguage = languagePrefs?.get() ?: Language.JAPANESE,
+                                        initialLanguage = languagePrefs?.get() ?: Language.DEFAULT,
                                         onLanguageChange = { languagePrefs?.set(it) }
                                     )
                                 } else {
                                     com.isuara.app.avatar.ui.AvatarPlayerScreen(
-                                        initialLanguage = languagePrefs?.get() ?: Language.JAPANESE,
+                                        initialLanguage = languagePrefs?.get() ?: Language.DEFAULT,
                                         onLanguageChange = { languagePrefs?.set(it) }
                                     )
                                 }

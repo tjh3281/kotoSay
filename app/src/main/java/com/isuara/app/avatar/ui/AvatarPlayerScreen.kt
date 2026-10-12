@@ -42,7 +42,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun AvatarPlayerScreen(
     motionPlayer: MotionPlayer = remember { MotionPlayer() },
-    initialLanguage: Language = Language.JAPANESE,
+    initialLanguage: Language = Language.DEFAULT,
     onLanguageChange: (Language) -> Unit = {}
 ) {
     val context = LocalContext.current
@@ -57,6 +57,7 @@ fun AvatarPlayerScreen(
     LaunchedEffect(initialLanguage) {
         language = initialLanguage
     }
+    val labels = SequencePanelLabels.of(language)
 
     var glView by remember { mutableStateOf<AvatarGLSurfaceView?>(null) }
     var inputText by remember { mutableStateOf("") }
@@ -198,17 +199,12 @@ fun AvatarPlayerScreen(
                             .fillMaxWidth()
                             .padding(vertical = 4.dp),
                         verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.spacedBy(8.dp)
+                        horizontalArrangement = Arrangement.Center
                     ) {
                         CircularProgressIndicator(
                             modifier = Modifier.size(16.dp),
                             strokeWidth = 2.dp,
                             color = Color(0xFF58A6FF)
-                        )
-                        Text(
-                            text = "Menganalisis Tatabahasa BIM via Gemini…",
-                            fontSize = 12.sp,
-                            color = Color(0xFF8B949E)
                         )
                     }
                 } else if (bimTokens.isNotEmpty()) {
@@ -223,7 +219,7 @@ fun AvatarPlayerScreen(
                             horizontalArrangement = Arrangement.spacedBy(6.dp)
                         ) {
                             Text(
-                                text = "BIM Final Sign Sequence",
+                                text = labels.sequenceTitle,
                                 fontSize = 11.sp,
                                 fontWeight = FontWeight.Bold,
                                 color = Color(0xFF58A6FF)
@@ -235,7 +231,7 @@ fun AvatarPlayerScreen(
                                     .padding(horizontal = 4.dp, vertical = 1.dp)
                             ) {
                                 Text(
-                                    text = "FINAL SIGN",
+                                    text = labels.finalTag,
                                     fontSize = 8.sp,
                                     fontWeight = FontWeight.Bold,
                                     color = Color(0xFF3FB950)
@@ -249,7 +245,7 @@ fun AvatarPlayerScreen(
                                 horizontalArrangement = Arrangement.spacedBy(4.dp)
                             ) {
                                 Text(
-                                    text = if (showReasoningPath) "▲ Tutup" else "▼ Reasoning",
+                                    text = if (showReasoningPath) "▲ ${labels.hide}" else "▼ ${labels.reasoning}",
                                     fontSize = 10.sp,
                                     color = Color(0xFF58A6FF),
                                     fontWeight = FontWeight.SemiBold
@@ -310,7 +306,7 @@ fun AvatarPlayerScreen(
                             )
 
                             Text(
-                                text = "Penalaran (Reasoning) · ${grammarResult?.model.orEmpty()}",
+                                text = "${labels.reasoning} · ${grammarResult?.model.orEmpty()}",
                                 fontSize = 10.sp,
                                 fontWeight = FontWeight.SemiBold,
                                 color = Color(0xFF8B949E)
@@ -333,7 +329,6 @@ fun AvatarPlayerScreen(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .imePadding()
-                .navigationBarsPadding()
                 .fillMaxWidth()
                 .background(Color(0xF0161B22), RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp))
                 .border(1.dp, Color(0x3330363D), RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp))
@@ -433,6 +428,24 @@ fun AvatarPlayerScreen(
                     )
                 }
             }
+        }
+    }
+}
+
+/** Headings of the sign-sequence panel, in the language picked in the menu. */
+private data class SequencePanelLabels(
+    val sequenceTitle: String,
+    val finalTag: String,
+    val reasoning: String,
+    val hide: String,
+) {
+    companion object {
+        fun of(language: Language) = when (language) {
+            Language.JAPANESE -> SequencePanelLabels("最終手話シーケンス", "最終", "推論", "閉じる")
+            Language.MALAY -> SequencePanelLabels("Urutan Isyarat Akhir", "AKHIR", "Penalaran", "Tutup")
+            Language.ENGLISH -> SequencePanelLabels("Final Sign Sequence", "FINAL SIGN", "Reasoning", "Hide")
+            Language.MANDARIN -> SequencePanelLabels("最终手语序列", "最终", "推理", "收起")
+            Language.TAMIL -> SequencePanelLabels("இறுதி சைகை வரிசை", "இறுதி", "காரணம்", "மூடு")
         }
     }
 }

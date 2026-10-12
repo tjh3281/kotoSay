@@ -61,7 +61,7 @@ fun CameraScreen(
     translator: Translator?,
     speech: SpeechRouter,
     emotionTracker: EmotionTracker? = null,
-    initialLanguage: Language = Language.JAPANESE,
+    initialLanguage: Language = Language.DEFAULT,
     onLanguageChange: (Language) -> Unit = {}
 ) {
     val context = LocalContext.current

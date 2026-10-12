@@ -146,8 +146,8 @@ class MotionRepository(private val context: Context) {
             VocabularyItem("yang", "Yang", "Which / That", "Daily Conversation", assetFileName = "yang.json"),
 
             // Synthesized Dual-Version Continuous Sentences
-            VocabularyItem("sentence_1_bim_encik_saya_boleh_tolong_apa", "BIM: Encik, Saya Boleh Tolong Apa?", "Sir, what can I help you with? (BIM)", "Sentences", assetFileName = "sentence_1_bim_encik_saya_boleh_tolong_apa.json"),
-            VocabularyItem("sentence_2_bim_apa_khabar_hari_ini_awak_datang_hospital_kenapa", "BIM: Apa-Khabar, Hari-Ini Awak Datang Hospital Kenapa?", "Hello, why did you come to the hospital today? (BIM)", "Sentences", assetFileName = "sentence_2_bim_apa_khabar_hari_ini_awak_datang_hospital_kenapa.json"),
+            VocabularyItem("sentence_1_bim_encik_saya_boleh_tolong_apa", "Encik, Saya Boleh Tolong Apa?", "Sir, what can I help you with?", "Sentences", assetFileName = "sentence_1_bim_encik_saya_boleh_tolong_apa.json"),
+            VocabularyItem("sentence_2_bim_apa_khabar_hari_ini_awak_datang_hospital_kenapa", "Apa-Khabar, Hari-Ini Awak Datang Hospital Kenapa?", "Hello, why did you come to the hospital today?", "Sentences", assetFileName = "sentence_2_bim_apa_khabar_hari_ini_awak_datang_hospital_kenapa.json"),
             VocabularyItem("sentence_1_ktbm_encik_apa_yang_saya_boleh_tolong", "KTBM: Encik Apa Yang Saya Boleh Tolong", "Sir, what can I help you with? (KTBM)", "Sentences", assetFileName = "sentence_1_ktbm_encik_apa_yang_saya_boleh_tolong.json"),
             VocabularyItem("sentence_2_ktbm_apa_khabar_kenapa_datang_hospital_hari_ini", "KTBM: Apa Khabar Kenapa Datang Hospital Hari Ini", "Hello, why did you come to the hospital today? (KTBM)", "Sentences", assetFileName = "sentence_2_ktbm_apa_khabar_kenapa_datang_hospital_hari_ini.json")
         )

@@ -4,8 +4,6 @@ import android.content.Context
 import android.os.SystemClock
 import android.util.Log
 import org.tensorflow.lite.Interpreter
-import org.tensorflow.lite.gpu.CompatibilityList
-import org.tensorflow.lite.gpu.GpuDelegate
 import java.io.FileInputStream
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
@@ -38,7 +36,6 @@ class SignInterpreter(context: Context) : AutoCloseable {
     }
 
     private val interpreter: Interpreter
-    private var gpuDelegate: GpuDelegate? = null
 
     // Reused for every inference.
     private val inputBuffer: ByteBuffer =
@@ -49,72 +46,27 @@ class SignInterpreter(context: Context) : AutoCloseable {
     private val outputBuffer =
         Array(1) { FloatArray(NUM_CLASSES) }
 
-    val usingGpu: Boolean
-        get() = gpuDelegate != null
-
     init {
         val model = loadModelFile(context)
-        var selectedInterpreter: Interpreter? = null
 
-        try {
-            val compatibilityList = CompatibilityList()
-
-            if (compatibilityList.isDelegateSupportedOnThisDevice) {
-                val delegateOptions =
-                    compatibilityList.bestOptionsForThisDevice.apply {
-                        setPrecisionLossAllowed(true)
-                        setInferencePreference(
-                            GpuDelegate.Options
-                                .INFERENCE_PREFERENCE_SUSTAINED_SPEED
-                        )
-                    }
-
-                gpuDelegate = GpuDelegate(delegateOptions)
-
-                val interpreterOptions = Interpreter.Options().apply {
-                    // numThreads affects CPU kernels, not GPU execution.
-                    addDelegate(gpuDelegate!!)
-                }
-
-                selectedInterpreter =
-                    Interpreter(model, interpreterOptions)
-
-                Log.i(TAG, "FP16 model initialized with GPU delegate")
-            } else {
-                Log.w(TAG, "TFLite GPU delegate unsupported")
-            }
-        } catch (error: Throwable) {
-            Log.w(
-                TAG,
-                "GPU initialization failed: ${error.message}",
-                error
+        // CPU (XNNPACK) only. The GPU delegate cannot take this graph: the
+        // BiLSTM has a dynamic-sized tensor, so applying it failed with "Error
+        // applying delegate" on every launch, after ~3s of OpenCL setup.
+        val cpuOptions = Interpreter.Options().apply {
+            setNumThreads(
+                Runtime.getRuntime()
+                    .availableProcessors()
+                    .coerceIn(2, 4)
             )
-
-            gpuDelegate?.close()
-            gpuDelegate = null
         }
-
-        if (selectedInterpreter == null) {
-            val cpuOptions = Interpreter.Options().apply {
-                setNumThreads(
-                    Runtime.getRuntime()
-                        .availableProcessors()
-                        .coerceIn(2, 4)
-                )
-            }
-
-            selectedInterpreter = Interpreter(model, cpuOptions)
-            Log.i(TAG, "Using CPU fallback")
-        }
-
-        interpreter = selectedInterpreter
+        interpreter = Interpreter(model, cpuOptions)
 
         validateTensorShapes()
         warmUp()
 
         Log.i(
             TAG,
-            "Loaded $MODEL_FILE; GPU=$usingGpu"
+            "Loaded $MODEL_FILE on CPU"
         )
     }
 
@@ -143,8 +95,8 @@ class SignInterpreter(context: Context) : AutoCloseable {
     }
 
     /**
-     * Warm-up is important because GPU delegate initialization and
-     * shader compilation can make the first invocation unusually slow.
+     * Warm-up keeps the first real prediction from paying XNNPACK's one-off
+     * setup cost mid-signing.
      */
     private fun warmUp() {
         val zeros = FloatArray(INPUT_FLOAT_COUNT)
@@ -209,8 +161,6 @@ class SignInterpreter(context: Context) : AutoCloseable {
 
     override fun close() {
         interpreter.close()
-        gpuDelegate?.close()
-        gpuDelegate = null
     }
 
     private fun loadModelFile(context: Context): MappedByteBuffer {

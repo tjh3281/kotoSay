@@ -12,7 +12,7 @@ import java.util.Locale
  * - [DISPLAY] (Japanese) is the canonical *display* language: the headline
  *   word, sentence and translation are always shown in it. The language the
  *   user picks only adds a second, smaller row beneath — or nothing, when the
- *   pick is [DISPLAY] itself, which is also the default.
+ *   pick is [DISPLAY] itself. The first-launch pick is [DEFAULT].
  *
  * Non-Malay entries name their key in the `translations` object of
  * `label_map.json`.
@@ -25,9 +25,10 @@ enum class Language(
     /** Compact label for the bottom-row chip. */
     val shortLabel: String,
 ) {
+    // Declaration order is the menu order.
+    ENGLISH("en", Locale.US, "English", "EN"),
     JAPANESE("ja", Locale.JAPAN, "Japanese", "日"),
     MALAY(null, Locale("ms", "MY"), "Malay", "MS"),
-    ENGLISH("en", Locale.US, "English", "EN"),
     MANDARIN("zh", Locale.SIMPLIFIED_CHINESE, "Mandarin", "中"),
     TAMIL("ta", Locale("ta", "IN"), "Tamil", "த");
 
@@ -41,7 +42,10 @@ enum class Language(
         /** The language every headline is shown in, and spoken as a fallback. */
         val DISPLAY = JAPANESE
 
+        /** Selected on first launch: Japanese headline with English beneath. */
+        val DEFAULT = ENGLISH
+
         fun fromName(name: String?): Language =
-            entries.firstOrNull { it.name == name } ?: DISPLAY
+            entries.firstOrNull { it.name == name } ?: DEFAULT
     }
 }
