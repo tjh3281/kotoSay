@@ -8,9 +8,9 @@ import kotlin.math.sin
 class TouchOrbitController(
     var azimuthDeg: Float = 0f,
     var elevationDeg: Float = 5f,
-    var distance: Float = 1.9f,
+    var distance: Float = 1.70f,
     var targetX: Float = 0f,
-    var targetY: Float = 1.08f,
+    var targetY: Float = 1.00f,
     var targetZ: Float = 0f
 ) {
     private var lastTouchX = 0f
@@ -61,27 +61,27 @@ class TouchOrbitController(
     fun setPresetFront() {
         azimuthDeg = 0f
         elevationDeg = 5f
-        distance = 1.9f
+        distance = 1.70f
         targetX = 0f
-        targetY = 1.08f
+        targetY = 1.00f
         targetZ = 0f
     }
 
     fun setPresetSide45() {
         azimuthDeg = 45f
         elevationDeg = 5f
-        distance = 1.9f
+        distance = 1.70f
         targetX = 0f
-        targetY = 1.08f
+        targetY = 1.00f
         targetZ = 0f
     }
 
     fun setPresetProfile90() {
         azimuthDeg = 90f
         elevationDeg = 5f
-        distance = 1.9f
+        distance = 1.70f
         targetX = 0f
-        targetY = 1.08f
+        targetY = 1.00f
         targetZ = 0f
     }
 
