@@ -13,17 +13,11 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccessibilityNew
-import androidx.compose.material.icons.filled.Videocam
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
 import com.kotosay.app.emotion.EmotionClassifier
 import com.kotosay.app.emotion.EmotionTracker
@@ -35,6 +29,7 @@ import com.kotosay.app.service.LanguagePreference
 import com.kotosay.app.service.Language
 import com.kotosay.app.service.Translator
 import com.kotosay.app.service.TtsService
+import com.kotosay.app.ui.BottomTabBar
 import com.kotosay.app.ui.CameraScreen
 
 class MainActivity : ComponentActivity() {
@@ -124,49 +119,10 @@ class MainActivity : ComponentActivity() {
 
                         Scaffold(
                             bottomBar = {
-                                NavigationBar(
-                                    containerColor = Color(0xFF0D1117),
-                                    contentColor = Color.White,
-                                    tonalElevation = 0.dp
-                                ) {
-                                    NavigationBarItem(
-                                        selected = currentTab == 0,
-                                        onClick = { currentTab = 0 },
-                                        icon = {
-                                            Icon(
-                                                Icons.Filled.Videocam,
-                                                contentDescription = "Camera"
-                                            )
-                                        },
-                                        label = { Text("Sign → Voice", fontSize = 12.sp, fontWeight = if (currentTab == 0) FontWeight.Bold else FontWeight.Normal) },
-                                        colors = NavigationBarItemDefaults.colors(
-                                            selectedIconColor = Color.White,
-                                            selectedTextColor = Color(0xFF58A6FF),
-                                            indicatorColor = Color(0xFF1F6FEB),
-                                            unselectedIconColor = Color(0xFF8B949E),
-                                            unselectedTextColor = Color(0xFF8B949E)
-                                        )
-                                    )
-
-                                    NavigationBarItem(
-                                        selected = currentTab == 1,
-                                        onClick = { currentTab = 1 },
-                                        icon = {
-                                            Icon(
-                                                Icons.Filled.AccessibilityNew,
-                                                contentDescription = "Avatar"
-                                            )
-                                        },
-                                        label = { Text("Text → Sign", fontSize = 12.sp, fontWeight = if (currentTab == 1) FontWeight.Bold else FontWeight.Normal) },
-                                        colors = NavigationBarItemDefaults.colors(
-                                            selectedIconColor = Color.White,
-                                            selectedTextColor = Color(0xFF58A6FF),
-                                            indicatorColor = Color(0xFF1F6FEB),
-                                            unselectedIconColor = Color(0xFF8B949E),
-                                            unselectedTextColor = Color(0xFF8B949E)
-                                        )
-                                    )
-                                }
+                                BottomTabBar(
+                                    selected = currentTab,
+                                    onSelect = { currentTab = it },
+                                )
                             }
                         ) { innerPadding ->
                             Box(
