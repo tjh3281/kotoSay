@@ -1,4 +1,4 @@
-package com.isuara.app.emotion
+package com.kotosay.app.emotion
 
 import ai.onnxruntime.OnnxTensor
 import ai.onnxruntime.OrtEnvironment
@@ -18,7 +18,7 @@ import java.nio.FloatBuffer
  * here. The b2 models score higher but are ~2.5x the compute, which we cannot
  * afford beside two MediaPipe graphs and the gloss LSTM.
  *
- * Lifecycle mirrors [com.isuara.app.ml.SignInterpreter]: construct, [predictLogits]
+ * Lifecycle mirrors [com.kotosay.app.ml.SignInterpreter]: construct, [predictLogits]
  * repeatedly, [close] once.
  *
  * NOT thread-safe. The scratch buffers are reused across calls to keep the

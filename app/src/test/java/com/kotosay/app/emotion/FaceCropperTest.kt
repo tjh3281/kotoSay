@@ -1,4 +1,4 @@
-package com.isuara.app.emotion
+package com.kotosay.app.emotion
 
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull

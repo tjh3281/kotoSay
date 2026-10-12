@@ -1,4 +1,4 @@
-package com.isuara.app.emotion
+package com.kotosay.app.emotion
 
 import android.graphics.Bitmap
 import android.util.Log

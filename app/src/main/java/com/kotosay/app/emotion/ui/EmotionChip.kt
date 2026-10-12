@@ -1,4 +1,4 @@
-package com.isuara.app.emotion.ui
+package com.kotosay.app.emotion.ui
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateColorAsState
@@ -23,9 +23,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.isuara.app.emotion.EmotionLabel
-import com.isuara.app.emotion.EmotionReading
-import com.isuara.app.ui.googleSansFlex
+import com.kotosay.app.emotion.EmotionLabel
+import com.kotosay.app.emotion.EmotionReading
+import com.kotosay.app.ui.googleSansFlex
 
 /**
  * The live facial-expression readout, styled to sit beside the FPS badge.

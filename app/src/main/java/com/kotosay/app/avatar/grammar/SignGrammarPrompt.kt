@@ -1,4 +1,4 @@
-package com.isuara.app.avatar.grammar
+package com.kotosay.app.avatar.grammar
 
 /**
  * Linguistic prompts for transforming spoken language into BIM (Bahasa Isyarat Malaysia)

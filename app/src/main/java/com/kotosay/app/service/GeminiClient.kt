@@ -1,7 +1,7 @@
-package com.isuara.app.service
+package com.kotosay.app.service
 
 import android.util.Log
-import com.isuara.app.BuildConfig
+import com.kotosay.app.BuildConfig
 import org.json.JSONArray
 import org.json.JSONObject
 import java.net.HttpURLConnection

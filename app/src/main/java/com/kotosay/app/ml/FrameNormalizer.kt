@@ -1,4 +1,4 @@
-package com.isuara.app.ml
+package com.kotosay.app.ml
 
 /**
  * FrameNormalizer — Kotlin port of normalize_frame.py (V3)

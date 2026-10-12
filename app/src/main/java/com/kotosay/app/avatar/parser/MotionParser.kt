@@ -1,10 +1,10 @@
-package com.isuara.app.avatar.parser
+package com.kotosay.app.avatar.parser
 
-import com.isuara.app.avatar.model.BimFrame
-import com.isuara.app.avatar.model.BimMotion
-import com.isuara.app.avatar.model.HandJoints
-import com.isuara.app.avatar.model.PoseJoints
-import com.isuara.app.avatar.model.Vec3
+import com.kotosay.app.avatar.model.BimFrame
+import com.kotosay.app.avatar.model.BimMotion
+import com.kotosay.app.avatar.model.HandJoints
+import com.kotosay.app.avatar.model.PoseJoints
+import com.kotosay.app.avatar.model.Vec3
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.InputStream

@@ -1,4 +1,4 @@
-package com.isuara.app.emotion
+package com.kotosay.app.emotion
 
 /**
  * Turns a 224x224 ARGB image into the exact tensor the EmotiEffLib model wants.

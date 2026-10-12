@@ -1,4 +1,4 @@
-package com.isuara.app.avatar.gl
+package com.kotosay.app.avatar.gl
 
 import android.view.MotionEvent
 import android.view.ScaleGestureDetector

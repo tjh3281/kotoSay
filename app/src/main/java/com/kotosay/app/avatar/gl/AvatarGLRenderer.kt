@@ -1,13 +1,13 @@
-package com.isuara.app.avatar.gl
+package com.kotosay.app.avatar.gl
 
 import android.opengl.GLES20
 import android.opengl.GLSurfaceView
 import android.opengl.Matrix
 import android.os.SystemClock
-import com.isuara.app.avatar.engine.AvatarPoseState
-import com.isuara.app.avatar.engine.KinematicSolver
-import com.isuara.app.avatar.engine.MotionPlayer
-import com.isuara.app.avatar.model.Vec3
+import com.kotosay.app.avatar.engine.AvatarPoseState
+import com.kotosay.app.avatar.engine.KinematicSolver
+import com.kotosay.app.avatar.engine.MotionPlayer
+import com.kotosay.app.avatar.model.Vec3
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import javax.microedition.khronos.egl.EGLConfig

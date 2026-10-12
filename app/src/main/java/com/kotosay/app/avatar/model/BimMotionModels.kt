@@ -1,4 +1,4 @@
-package com.isuara.app.avatar.model
+package com.kotosay.app.avatar.model
 
 import kotlin.math.sqrt
 

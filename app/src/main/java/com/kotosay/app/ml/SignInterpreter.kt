@@ -1,4 +1,4 @@
-package com.isuara.app.ml
+package com.kotosay.app.ml
 
 import android.content.Context
 import android.os.SystemClock

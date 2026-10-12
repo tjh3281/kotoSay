@@ -1,4 +1,4 @@
-package com.isuara.app.ui
+package com.kotosay.app.ui
 
 import android.graphics.Bitmap
 import android.util.Log
@@ -36,16 +36,16 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
-import com.isuara.app.R
-import com.isuara.app.emotion.EmotionReading
-import com.isuara.app.emotion.EmotionTracker
-import com.isuara.app.emotion.ui.EmotionChip
-import com.isuara.app.ml.SignPredictor
-import com.isuara.app.service.Language
-import com.isuara.app.service.SpeechRouter
-import com.isuara.app.service.Translation
-import com.isuara.app.service.TranslationStage
-import com.isuara.app.service.Translator
+import com.kotosay.app.R
+import com.kotosay.app.emotion.EmotionReading
+import com.kotosay.app.emotion.EmotionTracker
+import com.kotosay.app.emotion.ui.EmotionChip
+import com.kotosay.app.ml.SignPredictor
+import com.kotosay.app.service.Language
+import com.kotosay.app.service.SpeechRouter
+import com.kotosay.app.service.Translation
+import com.kotosay.app.service.TranslationStage
+import com.kotosay.app.service.Translator
 import kotlinx.coroutines.launch
 import java.util.concurrent.Executors
 

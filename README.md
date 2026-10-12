@@ -1,14 +1,25 @@
-# iSuara: Offline ML Sign Language Interpreter
+# kotoSay: A Two-Way Sign Language Interpreter in Your Pocket
+
+**kotoSay：ポケットに入る双方向AI手話通訳**
 
 ### 🚀 Try it Live
 
-[![Download APK](https://img.shields.io/badge/Download_APK_V3.1.6-iSuara-2ea44f?style=for-the-badge&logo=android)](https://github.com/HongZhangLim/iSuara/releases/download/v3.1.6/iSuara-v3.1.6.apk)
+- **App link:** _(Google Drive link — to be added)_
+- **Repository:** https://github.com/tjh3281/kotoSay
 
 _(Note: Ensure you allow "Install from unknown sources" on your Android device to install the prototype)._
 
 ## 1. Repository Overview & Team Introduction
 
-Welcome to the official repository for **iSuara**, an Edge-AI application built to provide real-time, pocket-sized translation of sign language into Japanese, Malay, English, Mandarin and Tamil. This repository contains the complete Android Studio project — native Kotlin UI, MediaPipe vision extractors, LiteRT inference pipeline, and the Gemini 3.8 Flash translation layer.
+Deaf people sign to a phone; kotoSay translates sign and emotion into voice and a 3D avatar.
+
+スマートフォンで使える双方向AI手話通訳アプリ。日本手話（JSL）とマレーシア手話（MSL）を読み取って音声にし、相手の返事は3Dアバターが手話で返すので、ろう者が第一言語のまま働き、学び、助けを求められます。
+
+This repository contains the complete Android Studio project — native Kotlin UI, MediaPipe vision extractors, LiteRT inference pipeline, Gemini translation layer and the 3D signing avatar.
+
+**Team Name:** sudo rm -rf /
+
+Our team unites experts of various domains. Sign linguistics expert **Shawn** architects sign grammar and 3D avatars, while ML engineer **Zayn** models our core AI. Software engineer **Jason** deploys these innovations into a robust MVP. Driven by user impact, **Zoey** serves as our community liaison to connect directly with target users, as **Edmund** guides business strategy to anchor revenue and key partnerships.
 
 ---
 
@@ -16,13 +27,11 @@ Welcome to the official repository for **iSuara**, an Edge-AI application built 
 
 ### Problem Statement
 
-In Malaysia, there are **44,000 Deaf and hard-of-hearing individuals**, but only **60 certified interpreters** nationwide. Hiring a human interpreter costs up to RM150/hour and often requires a 3-day wait. As a result, 78% of Deaf individuals never encounter an interpreter when seeking specialized health services, and 70% fear visiting clinics alone due to the risk of being misunderstood. Writing on paper is not a viable substitute because sign language uses a different grammatical structure (Topic-Comment) than spoken Malay, making written text a challenging second language.
-
-A mistranslation in a clinic is not a bad user experience — it is a harm. That constraint drove most of the engineering decisions below.
+Sign language has long been denied, mocked as _te-mane_ ("monkey imitation"). Sign language is the Deaf's first and only native language. Instead of providing translation, a bank refused to let a Deaf customer open an account alone; Yokohama police refused to take a statement from a Deaf person. We interviewed Deaf taxi driver Mr. Ong, who was assaulted when he was signing. He was intimidated into dropping his report after the police refused to provide an interpreter.
 
 ### SDG Alignment
 
-iSuara is built to advance the United Nations Sustainable Development Goals:
+kotoSay is built to advance the United Nations Sustainable Development Goals:
 
 - **SDG 10 (Reduced Inequalities) - Target 10.2:** Promotes universal social and economic inclusion by giving the Deaf community an independent, real-time voice.
 - **SDG 4 (Quality Education) - Targets 4.5 & 4.a:** Empowers Deaf students to advocate for themselves and participate in inclusive learning environments.
@@ -30,7 +39,42 @@ iSuara is built to advance the United Nations Sustainable Development Goals:
 
 ### Short Description
 
-iSuara is a real-time application that bridges the communication gap between the Deaf community and the hearing public. It uses on-device Edge Machine Learning to track 98 signs via the smartphone camera, then sends the detected glosses to Gemini 3.8 Flash, which restructures them into a natural sentence. The result is rendered in Japanese, Malay, English, Mandarin and Tamil, and spoken aloud in whichever the user selects. A 3D avatar signs replies back, making the exchange a conversation rather than a one-way readout.
+kotoSay is an AI interpreter for Japanese and Malaysian Sign Language. Operating fully offline, it decodes signs and facial expressions instantly. Gemini then synthesizes contextualized, emotionally expressive audio in five languages. When hearing individuals reply via text, a lifelike 3D avatar signs back using sign grammar. Addressing critical WFD and WASLI gaps, kotoSay empowers the Deaf community to communicate autonomously in high-stakes settings — from banks to job interviews.
+
+### Validation
+
+We evaluated kotoSay with 8 MSL researchers at UKM, identifying limitations in fast and distant signs. We then refined the model to achieve a 1.5 m functional range during rapid signing. A Deaf worker at the RC Deaf Missions (RCDM) café validated the upgrades, praising its accelerated speed, instant voice, and expanded range. RCDM's co-founder is impressed and expressed strong interest in a long-term co-creation partnership to expand kotoSay into a feasible Relay Interpreting Services platform.
+
+### Revenue Model
+
+Our main plan puts kotoSay on a Deaf user's phone for **¥190 a month** after a two-month free trial. Families and employers can buy it, and Japan's 2.7% disability hiring rule gives employers a reason to.
+
+- **Why pay:** free interpreters must be booked in advance; kotoSay works the moment a conversation starts.
+- **Why the price works:** serving even a heavy user costs us under ¥100 a month, about half the price.
+
+### Market Competition
+
+Sign language AI became a real market in 2026 with Google's SL2T. Asia has about 40 million Deaf signers. At ¥190 a month each, that is ¥90 billion a year.
+
+Deaf people need three things: their own sign language, anytime, answered in sign. Each rival misses one:
+
+| Option | What it misses |
+|---|---|
+| Interpreters | Need booking |
+| SoftBank's SureTalk | Needs a paid counter |
+| UD Talk | Needs typing |
+| Google SL2T | Cannot sign back |
+| **kotoSay** | **Meets all three** |
+
+### Growth Strategy
+
+- **Phase 1 (Q3 2027):** Expand vocabulary to 300+ JSL/MSL signs, launch pilots with regional Deaf associations, incorporate and secure institutional growth capital.
+- **Phase 2 (Q4 2028):** Launch a pay-as-you-go API, enabling banks, clinics, and taxis to integrate kotoSay natively.
+- **Phase 3 (Q1 2030):** Scale regionally by training our core ML pipeline across 11 Asian sign languages.
+
+### Achievements
+
+kotoSay is a production-ready Android app powered by our proprietary 1.4M-parameter sign language ML model. Trained on 39.2k clips, it achieves an ultra-low 3 ms latency. Awarded **1st Runner-Up at Google KitaHack and MUBA 2026**, we are scaling globally via elite international research partnerships.
 
 ---
 
@@ -38,11 +82,11 @@ iSuara is a real-time application that bridges the communication gap between the
 
 - **Real-Time Vision Tracking:** Uses the standard smartphone camera to extract 3D skeletal data without requiring special gloves, depth cameras, or cloud video processing.
 - **Speed-Invariant ML Recognition:** A custom AI model that adapts to any signing speed, successfully recognizing highly compressed, fast motion without dropping frames.
-- **Two-Way Communication:** A 3D avatar signs spoken or typed replies back to the user from a library of 110 motion clips, so the hearing party can answer rather than only read.
-- **Semantic AI Translator:** Overcomes the "Topic-Comment" syntax barrier of sign language by inferring hidden context and restructuring disjointed keywords into grammatical Malay.
+- **Two-Way Communication:** A 3D avatar signs typed replies back to the user from a library of 110 motion clips, so the hearing party can answer rather than only read. The sign sequence and its grammar reasoning are shown in the user's chosen language.
+- **Semantic AI Translator:** Overcomes the "Topic-Comment" syntax barrier of sign language by inferring hidden context and restructuring disjointed keywords into grammatical sentences.
 - **Expression-Aware Register:** An on-device expression model (8 classes) shifts the translation's tone and the voice's pitch and rate — "sakit" said calmly and "sakit" said in distress should not sound identical.
-- **Four-Language Output:** Every translation returns Malay, English, Mandarin and Tamil in a single request, so switching the display language afterwards is instant and costs nothing. Non-Malay selections keep the Malay visible and add the chosen language on a row beneath it.
-- **Multilingual Text-To-Speech:** Speaks the selected language, falling back to Malay when a device lacks that voice — Mandarin and Tamil voice data is frequently absent on Malaysian retail devices.
+- **Five-Language Output:** Every translation returns Japanese, Malay, English, Mandarin and Tamil in a single request, so switching the display language afterwards is instant and costs nothing. Japanese is always the headline, with the chosen language on a row beneath it (English by default).
+- **Multilingual Text-To-Speech:** Speaks the chosen language, falling back to Japanese and then Malay when a device lacks that voice.
 
 ---
 
@@ -50,10 +94,10 @@ iSuara is a real-time application that bridges the communication gap between the
 
 ### Core Technologies
 
-- **Gemini 3.8 Flash:** Acts as our cloud-based semantic brain, transforming raw sign glosses (e.g., "Market + I + Go") into natural sentences (e.g., "Saya pergi ke pasar") in one call that returns all four languages.
-- **Android Studio & Kotlin Native:** The foundation of our zero-copy architecture, enabling direct access to camera hardware (CameraX) and the device's GPU without the bridge-latency of cross-platform frameworks.
+- **Gemini (3.5 Flash Lite → 3.1 Flash Lite → 3.6 Flash):** Acts as our cloud-based semantic brain, transforming raw sign glosses (e.g., "Market + I + Go") into natural sentences in one call that returns all five languages. Models are tried in that order, and an overloaded model is skipped immediately.
+- **Android Studio & Kotlin Native:** The foundation of our architecture, enabling direct access to camera hardware (CameraX) without the bridge-latency of cross-platform frameworks.
 - **MediaPipe:** Handles hardware-parallelized skeletal extraction (Pose on GPU, Hands on CPU) of 75 keypoints per frame.
-- **LiteRT:** Runs our custom quantized BiLSTM model locally, taking only ~1-3ms per inference.
+- **LiteRT:** Runs our custom Bidirectional LSTM sign model locally on the CPU (XNNPACK).
 - **Android TTS:** The offline native engines used to execute the final audio output.
 - **Google Colab:** Our primary environment for model training and evaluating quantitative analytics via Matplotlib.
 
@@ -61,6 +105,7 @@ iSuara is a real-time application that bridges the communication gap between the
 
 - **Jetpack Compose:** For building a modern, reactive, and overlay-driven UI.
 - **ONNX Runtime:** Runs the on-device facial expression classifier.
+- **OpenGL ES:** Renders the 3D signing avatar.
 - **Matplotlib:** Used extensively during the Colab training phase to plot cross-entropy loss, accuracy curves, and validate EMA smoothing ratios.
 
 ---
@@ -69,18 +114,18 @@ iSuara is a real-time application that bridges the communication gap between the
 
 ### System Architecture
 
-iSuara utilizes a **Decoupled Edge-Cloud Pipeline**. Heavy visual processing (tracking and sign prediction) happens 100% offline on the Edge, ensuring zero-latency and total user privacy. The Cloud (Gemini 3.8 Flash) is triggered only for semantic translation of text payloads (<1KB) — no video ever leaves the device.
+kotoSay utilizes a **Decoupled Edge-Cloud Pipeline**. Heavy visual processing (tracking and sign prediction) happens 100% offline on the Edge, ensuring low latency and total user privacy. The Cloud (Gemini) is triggered only for semantic translation of text payloads (<1KB) — no video ever leaves the device.
 
-The cloud stage is a single Gemini call that returns the sentence in all four languages at once, so they stay mutually consistent. If the call fails, the app falls back to displaying and speaking the raw glosses.
+The cloud stage is a single Gemini call that returns the sentence in all five languages at once, so they stay mutually consistent. If every model fails, the app falls back to displaying and speaking the detected signs word by word in the chosen language.
 
 ### Workflow
 
 1. **Capture:** CameraX captures 640x480 video at up to 60 FPS.
 2. **Extract:** MediaPipe hardware parallelism tracks body pose (GPU) and dynamically crops hand regions (CPU).
 3. **Normalize:** `FrameNormalizer` applies EMA smoothing and engineered features, expanding 258 raw landmarks into 780 features per frame.
-4. **Predict:** BiLSTM model evaluates the temporal array to predict one of 98 signs natively on the GPU.
-5. **Refine:** Gemini restructures the buffered sign tokens into conversational SVO Malay, plus English, Mandarin and Tamil.
-6. **Output:** The app displays the sentence — Malay always, with the selected language beneath it — and speaks it aloud.
+4. **Predict:** The Bidirectional LSTM model evaluates the temporal array to predict one of 98 signs on the CPU.
+5. **Refine:** Gemini restructures the buffered sign tokens into a natural sentence in Japanese, Malay, English, Mandarin and Tamil.
+6. **Output:** The app displays the sentence — Japanese always, with the chosen language beneath it — and speaks it aloud.
 
 ### Model Performance
 
@@ -92,7 +137,7 @@ The V3.1.5 model reaches **91.2% held-out test accuracy** at 1x speed with 1,374
 
 - **Challenge 1: Model Regression & Overheating**
 - _Problem:_ We initially used a Transformer model. It was too heavy for mobile, causing overheating and dropping framerates to 10 FPS.
-- _Solution:_ We pivoted to a **Bidirectional LSTM with Dot Attention**. Reading the window in both directions also matters linguistically — several signs share an identical opening handshape and diverge only in the final frames, so a forward-only model commits too early. It runs in ~3ms on the GPU, bumping our framerate to a smooth 35+ FPS.
+- _Solution:_ We pivoted to a **Bidirectional LSTM with Dot Attention**. Reading the window in both directions also matters linguistically — several signs share an identical opening handshape and diverge only in the final frames, so a forward-only model commits too early. This bumped our framerate to a smooth 35+ FPS.
 
 - **Challenge 2: High Tracking Latency**
 - _Problem:_ Real-world conversations were slow because extracting 258 keypoints caused a bottleneck.
@@ -127,9 +172,9 @@ GEMINI_API_KEY=your-gemini-key
 # GEMINI_API_KEY_3=
 ```
 
-The same key drives translation, the avatar's grammar step and the expressive voice.
+The same key drives translation and the avatar's grammar step.
 
-_Translation works without this — the app falls back to showing and speaking the raw detected glosses._
+_Translation works without this — the app falls back to showing and speaking the detected signs word by word._
 
 ### 3. Build & Run
 
@@ -142,8 +187,9 @@ _Translation works without this — the app falls back to showing and speaking t
 
 1. Grant camera permissions when prompted.
 2. Point the camera at a person signing.
-3. Detected words will appear and build in the bottom buffer.
-4. Translation fires automatically after two seconds of stillness, or tap **Translate** to force it.
-5. Use the language chip (**MS / EN / 中 / த**) to switch display and speech language. The choice persists across restarts.
-6. Tap **Speak** to hear the sentence in the selected language.
+3. Detected words will appear and build in the sentence box.
+4. Translation fires automatically after a few seconds of stillness, or tap **Translate** to force it.
+5. Use the language chip (**EN / 日 / MS / 中 / த**) to choose the language shown beneath the Japanese. The choice persists across restarts.
+6. Tap the play button to hear the sentence in the chosen language.
 7. Tap the bin icon to clear the current buffer.
+8. Switch to the **Text → Sign** tab to type a reply and watch the 3D avatar sign it.

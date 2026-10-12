@@ -1,13 +1,13 @@
-package com.isuara.app.avatar
+package com.kotosay.app.avatar
 
-import com.isuara.app.avatar.engine.KinematicSolver
-import com.isuara.app.avatar.engine.MotionPlayer
-import com.isuara.app.avatar.model.BimFrame
-import com.isuara.app.avatar.model.BimMotion
-import com.isuara.app.avatar.model.HandJoints
-import com.isuara.app.avatar.model.PoseJoints
-import com.isuara.app.avatar.model.Vec3
-import com.isuara.app.avatar.parser.MotionParser
+import com.kotosay.app.avatar.engine.KinematicSolver
+import com.kotosay.app.avatar.engine.MotionPlayer
+import com.kotosay.app.avatar.model.BimFrame
+import com.kotosay.app.avatar.model.BimMotion
+import com.kotosay.app.avatar.model.HandJoints
+import com.kotosay.app.avatar.model.PoseJoints
+import com.kotosay.app.avatar.model.Vec3
+import com.kotosay.app.avatar.parser.MotionParser
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue

@@ -1,11 +1,11 @@
-package com.isuara.app.avatar.gl
+package com.kotosay.app.avatar.gl
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.opengl.GLSurfaceView
 import android.view.MotionEvent
 import android.view.ScaleGestureDetector
-import com.isuara.app.avatar.engine.MotionPlayer
+import com.kotosay.app.avatar.engine.MotionPlayer
 
 @SuppressLint("ViewConstructor")
 class AvatarGLSurfaceView(

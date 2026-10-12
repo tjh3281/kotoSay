@@ -1,4 +1,4 @@
-package com.isuara.app.service
+package com.kotosay.app.service
 
 import java.util.Locale
 

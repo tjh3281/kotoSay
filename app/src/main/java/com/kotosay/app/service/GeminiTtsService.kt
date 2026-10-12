@@ -1,12 +1,12 @@
-package com.isuara.app.service
+package com.kotosay.app.service
 
 import android.media.AudioAttributes
 import android.media.AudioFormat
 import android.media.AudioTrack
 import android.util.Base64
 import android.util.Log
-import com.isuara.app.BuildConfig
-import com.isuara.app.emotion.EmotionReading
+import com.kotosay.app.BuildConfig
+import com.kotosay.app.emotion.EmotionReading
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONObject

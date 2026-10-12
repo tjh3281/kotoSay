@@ -1,6 +1,6 @@
-package com.isuara.app.avatar.engine
+package com.kotosay.app.avatar.engine
 
-import com.isuara.app.avatar.model.Vec3
+import com.kotosay.app.avatar.model.Vec3
 
 object KinematicSolver {
 

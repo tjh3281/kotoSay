@@ -1,12 +1,12 @@
-package com.isuara.app.avatar.data
+package com.kotosay.app.avatar.data
 
 import android.content.Context
 import android.util.Log
-import com.isuara.app.avatar.model.BimFrame
-import com.isuara.app.avatar.model.BimMotion
-import com.isuara.app.avatar.model.HandJoints
-import com.isuara.app.avatar.model.PoseJoints
-import com.isuara.app.avatar.parser.MotionParser
+import com.kotosay.app.avatar.model.BimFrame
+import com.kotosay.app.avatar.model.BimMotion
+import com.kotosay.app.avatar.model.HandJoints
+import com.kotosay.app.avatar.model.PoseJoints
+import com.kotosay.app.avatar.parser.MotionParser
 import java.io.InputStream
 
 data class VocabularyItem(

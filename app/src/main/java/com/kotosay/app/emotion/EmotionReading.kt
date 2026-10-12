@@ -1,4 +1,4 @@
-package com.isuara.app.emotion
+package com.kotosay.app.emotion
 
 /**
  * A settled read of the signer's facial expression.

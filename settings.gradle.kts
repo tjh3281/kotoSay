@@ -17,5 +17,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "iSuara"
+rootProject.name = "kotoSay"
 include(":app")

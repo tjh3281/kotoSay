@@ -1,9 +1,9 @@
-package com.isuara.app.service
+package com.kotosay.app.service
 
 import android.content.Context
 import android.speech.tts.TextToSpeech
 import android.util.Log
-import com.isuara.app.emotion.EmotionReading
+import com.kotosay.app.emotion.EmotionReading
 import java.util.Locale
 
 /**
@@ -90,12 +90,12 @@ class TtsService(context: Context) {
 
         if (language == Language.MALAY) {
             applyMalay()
-            if (text.isNotBlank()) engine.speak(text, TextToSpeech.QUEUE_FLUSH, null, "isuara_tts")
+            if (text.isNotBlank()) engine.speak(text, TextToSpeech.QUEUE_FLUSH, null, "kotosay_tts")
             return
         }
 
         if (isUsable(engine.setLanguage(language.locale))) {
-            if (text.isNotBlank()) engine.speak(text, TextToSpeech.QUEUE_FLUSH, null, "isuara_tts")
+            if (text.isNotBlank()) engine.speak(text, TextToSpeech.QUEUE_FLUSH, null, "kotosay_tts")
             return
         }
 
@@ -104,7 +104,7 @@ class TtsService(context: Context) {
         if (language != display && isUsable(engine.setLanguage(display.locale))) {
             Log.w(TAG, "${language.englishName} TTS unavailable, speaking ${display.englishName} instead")
             if (fallbackText.isNotBlank()) {
-                engine.speak(fallbackText, TextToSpeech.QUEUE_FLUSH, null, "isuara_tts")
+                engine.speak(fallbackText, TextToSpeech.QUEUE_FLUSH, null, "kotosay_tts")
             }
             return
         }
@@ -112,7 +112,7 @@ class TtsService(context: Context) {
         Log.w(TAG, "${language.englishName} and ${display.englishName} TTS unavailable, using the Malay voice")
         applyMalay()
         if (fallbackText.isNotBlank()) {
-            engine.speak(fallbackText, TextToSpeech.QUEUE_FLUSH, null, "isuara_tts")
+            engine.speak(fallbackText, TextToSpeech.QUEUE_FLUSH, null, "kotosay_tts")
         }
     }
 

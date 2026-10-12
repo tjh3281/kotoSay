@@ -1,4 +1,4 @@
-package com.isuara.app.service
+package com.kotosay.app.service
 
 import android.content.Context
 
@@ -11,7 +11,7 @@ import android.content.Context
 class LanguagePreference(context: Context) {
 
     private companion object {
-        const val PREFS = "isuara_prefs"
+        const val PREFS = "kotosay_prefs"
         // Bumped from "display_language" when Japanese became the default, so
         // installs that had already saved Malay start in Japanese once.
         const val KEY_LANGUAGE = "display_language_v2"

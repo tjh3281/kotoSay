@@ -1,4 +1,4 @@
-package com.isuara.app
+package com.kotosay.app
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -25,17 +25,17 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
-import com.isuara.app.emotion.EmotionClassifier
-import com.isuara.app.emotion.EmotionTracker
-import com.isuara.app.ml.SignPredictor
-import com.isuara.app.service.GeminiClient
-import com.isuara.app.service.GeminiTranslator
-import com.isuara.app.service.SpeechRouter
-import com.isuara.app.service.LanguagePreference
-import com.isuara.app.service.Language
-import com.isuara.app.service.Translator
-import com.isuara.app.service.TtsService
-import com.isuara.app.ui.CameraScreen
+import com.kotosay.app.emotion.EmotionClassifier
+import com.kotosay.app.emotion.EmotionTracker
+import com.kotosay.app.ml.SignPredictor
+import com.kotosay.app.service.GeminiClient
+import com.kotosay.app.service.GeminiTranslator
+import com.kotosay.app.service.SpeechRouter
+import com.kotosay.app.service.LanguagePreference
+import com.kotosay.app.service.Language
+import com.kotosay.app.service.Translator
+import com.kotosay.app.service.TtsService
+import com.kotosay.app.ui.CameraScreen
 
 class MainActivity : ComponentActivity() {
 
@@ -188,7 +188,7 @@ class MainActivity : ComponentActivity() {
                                         onLanguageChange = { languagePrefs?.set(it) }
                                     )
                                 } else {
-                                    com.isuara.app.avatar.ui.AvatarPlayerScreen(
+                                    com.kotosay.app.avatar.ui.AvatarPlayerScreen(
                                         initialLanguage = languagePrefs?.get() ?: Language.DEFAULT,
                                         onLanguageChange = { languagePrefs?.set(it) }
                                     )

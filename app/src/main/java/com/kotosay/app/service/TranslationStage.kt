@@ -1,4 +1,4 @@
-package com.isuara.app.service
+package com.kotosay.app.service
 
 /** Where the translation currently is, for display while the user waits. */
 enum class TranslationStage(val label: String) {

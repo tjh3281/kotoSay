@@ -1,4 +1,4 @@
-package com.isuara.app.avatar.ui
+package com.kotosay.app.avatar.ui
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
@@ -31,12 +31,12 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
-import com.isuara.app.avatar.data.MotionRepository
-import com.isuara.app.avatar.engine.MotionPlayer
-import com.isuara.app.avatar.gl.AvatarGLSurfaceView
-import com.isuara.app.avatar.grammar.GeminiSignGrammarService
-import com.isuara.app.avatar.grammar.SignGrammarResult
-import com.isuara.app.service.Language
+import com.kotosay.app.avatar.data.MotionRepository
+import com.kotosay.app.avatar.engine.MotionPlayer
+import com.kotosay.app.avatar.gl.AvatarGLSurfaceView
+import com.kotosay.app.avatar.grammar.GeminiSignGrammarService
+import com.kotosay.app.avatar.grammar.SignGrammarResult
+import com.kotosay.app.service.Language
 import kotlinx.coroutines.launch
 
 @Composable

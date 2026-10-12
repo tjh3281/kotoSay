@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace = "com.isuara.app"
+    namespace = "com.kotosay.app"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.isuara.app"
+        applicationId = "com.kotosay.app"
         minSdk = 26
         targetSdk = 35
         versionCode = 1

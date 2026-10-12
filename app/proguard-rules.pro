@@ -1,4 +1,4 @@
-# ProGuard rules for iSuara
+# ProGuard rules for kotoSay
 
 # TFLite
 -keep class org.tensorflow.** { *; }
@@ -9,4 +9,4 @@
 -dontwarn com.google.mediapipe.**
 
 # Keep model-related data classes
--keep class com.isuara.app.ml.** { *; }
+-keep class com.kotosay.app.ml.** { *; }

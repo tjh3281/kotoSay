@@ -1,7 +1,7 @@
-package com.isuara.app.service
+package com.kotosay.app.service
 
 import android.util.Log
-import com.isuara.app.emotion.EmotionReading
+import com.kotosay.app.emotion.EmotionReading
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob

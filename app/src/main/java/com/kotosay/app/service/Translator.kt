@@ -1,6 +1,6 @@
-package com.isuara.app.service
+package com.kotosay.app.service
 
-import com.isuara.app.emotion.EmotionReading
+import com.kotosay.app.emotion.EmotionReading
 import kotlinx.coroutines.flow.StateFlow
 
 /**

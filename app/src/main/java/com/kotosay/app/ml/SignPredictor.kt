@@ -1,4 +1,4 @@
-package com.isuara.app.ml
+package com.kotosay.app.ml
 
 import android.content.Context
 import android.graphics.Bitmap
@@ -10,8 +10,8 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import com.isuara.app.emotion.EmotionTracker
-import com.isuara.app.service.Language
+import com.kotosay.app.emotion.EmotionTracker
+import com.kotosay.app.service.Language
 import org.json.JSONObject
 import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicInteger

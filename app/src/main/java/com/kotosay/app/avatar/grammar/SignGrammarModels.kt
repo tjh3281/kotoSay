@@ -1,4 +1,4 @@
-package com.isuara.app.avatar.grammar
+package com.kotosay.app.avatar.grammar
 
 /**
  * Result of AI reasoning transforming natural spoken text into BIM sign grammar.

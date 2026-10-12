@@ -1,8 +1,8 @@
-package com.isuara.app.avatar.grammar
+package com.kotosay.app.avatar.grammar
 
 import android.util.Log
-import com.isuara.app.service.GeminiClient
-import com.isuara.app.service.Language
+import com.kotosay.app.service.GeminiClient
+import com.kotosay.app.service.Language
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONObject

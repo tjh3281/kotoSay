@@ -1,4 +1,4 @@
-package com.isuara.app.emotion
+package com.kotosay.app.emotion
 
 import org.json.JSONObject
 import org.junit.Assert.assertEquals

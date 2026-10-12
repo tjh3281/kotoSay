@@ -1,4 +1,4 @@
-package com.isuara.app.emotion
+package com.kotosay.app.emotion
 
 /**
  * The decision rules that turn a set of per-frame distributions into one label.

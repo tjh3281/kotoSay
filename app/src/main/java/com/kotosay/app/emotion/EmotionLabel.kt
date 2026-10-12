@@ -1,4 +1,4 @@
-package com.isuara.app.emotion
+package com.kotosay.app.emotion
 
 /**
  * The eight AffectNet expression classes predicted by the EmotiEffLib model.

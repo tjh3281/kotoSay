@@ -1,7 +1,7 @@
-package com.isuara.app.service
+package com.kotosay.app.service
 
-import com.isuara.app.emotion.EmotionLabel
-import com.isuara.app.emotion.EmotionReading
+import com.kotosay.app.emotion.EmotionLabel
+import com.kotosay.app.emotion.EmotionReading
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
