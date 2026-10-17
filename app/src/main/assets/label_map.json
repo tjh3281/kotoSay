@@ -6,9 +6,9 @@
     "Duduk",
     "Maaf",
     "Gembira",
-    "Curi",
+    "Mereka",
     "Rumah",
-    "Demam",
+    "Panas",
     "Dia",
     "Apa Khabar",
     "Dua",
@@ -16,14 +16,14 @@
     "Ibu",
     "Kita",
     "Klinik",
-    "Benda",
+    "Besar",
     "Lima",
-    "Doktor",
+    "Assalamualaikum",
     "Bila",
     "Pergi",
     "Salah",
     "Berhenti",
-    "Hilang",
+    "Bagaimana",
     "Pagi",
     "Apa",
     "Bayar",
@@ -43,7 +43,7 @@
     "Awak",
     "Boleh",
     "Minum",
-    "Tidak Sihat",
+    "Sejuk",
     "Malam",
     "Saya",
     "Ayah",
@@ -54,9 +54,9 @@
     "Kakak",
     "Beli",
     "Polis",
-    "Tak tahu",
+    "Fikir",
     "Faham",
-    "Sakit perut",
+    "Lapar",
     "Petang",
     "Kecil",
     "Mahu",
@@ -106,9 +106,9 @@
     "Duduk": 3,
     "Maaf": 4,
     "Gembira": 5,
-    "Curi": 6,
+    "Mereka": 6,
     "Rumah": 7,
-    "Demam": 8,
+    "Panas": 8,
     "Dia": 9,
     "Apa Khabar": 10,
     "Dua": 11,
@@ -116,14 +116,14 @@
     "Ibu": 13,
     "Kita": 14,
     "Klinik": 15,
-    "Benda": 16,
+    "Besar": 16,
     "Lima": 17,
-    "Doktor": 18,
+    "Assalamualaikum": 18,
     "Bila": 19,
     "Pergi": 20,
     "Salah": 21,
     "Berhenti": 22,
-    "Hilang": 23,
+    "Bagaimana": 23,
     "Pagi": 24,
     "Apa": 25,
     "Bayar": 26,
@@ -143,7 +143,7 @@
     "Awak": 40,
     "Boleh": 41,
     "Minum": 42,
-    "Tidak Sihat": 43,
+    "Sejuk": 43,
     "Malam": 44,
     "Saya": 45,
     "Ayah": 46,
@@ -154,9 +154,9 @@
     "Kakak": 51,
     "Beli": 52,
     "Polis": 53,
-    "Tak tahu": 54,
+    "Fikir": 54,
     "Faham": 55,
-    "Sakit perut": 56,
+    "Lapar": 56,
     "Petang": 57,
     "Kecil": 58,
     "Mahu": 59,
@@ -206,9 +206,9 @@
     "3": "Duduk",
     "4": "Maaf",
     "5": "Gembira",
-    "6": "Curi",
+    "6": "Mereka",
     "7": "Rumah",
-    "8": "Demam",
+    "8": "Panas",
     "9": "Dia",
     "10": "Apa Khabar",
     "11": "Dua",
@@ -216,14 +216,14 @@
     "13": "Ibu",
     "14": "Kita",
     "15": "Klinik",
-    "16": "Benda",
+    "16": "Besar",
     "17": "Lima",
-    "18": "Doktor",
+    "18": "Assalamualaikum",
     "19": "Bila",
     "20": "Pergi",
     "21": "Salah",
     "22": "Berhenti",
-    "23": "Hilang",
+    "23": "Bagaimana",
     "24": "Pagi",
     "25": "Apa",
     "26": "Bayar",
@@ -243,7 +243,7 @@
     "40": "Awak",
     "41": "Boleh",
     "42": "Minum",
-    "43": "Tidak Sihat",
+    "43": "Sejuk",
     "44": "Malam",
     "45": "Saya",
     "46": "Ayah",
@@ -254,9 +254,9 @@
     "51": "Kakak",
     "52": "Beli",
     "53": "Polis",
-    "54": "Tak tahu",
+    "54": "Fikir",
     "55": "Faham",
-    "56": "Sakit perut",
+    "56": "Lapar",
     "57": "Petang",
     "58": "Kecil",
     "59": "Mahu",
@@ -336,11 +336,11 @@
       "ta": "சந்தோஷம்",
       "ja": "うれしい"
     },
-    "Curi": {
-      "en": "Steal",
-      "zh": "偷",
-      "ta": "திருடு",
-      "ja": "盗む"
+    "Mereka": {
+      "en": "They / Them",
+      "zh": "他们",
+      "ta": "அவர்கள்",
+      "ja": "彼ら"
     },
     "Rumah": {
       "en": "House",
@@ -348,11 +348,11 @@
       "ta": "வீடு",
       "ja": "家"
     },
-    "Demam": {
-      "en": "Fever",
-      "zh": "发烧",
-      "ta": "காய்ச்சல்",
-      "ja": "熱"
+    "Panas": {
+      "en": "Hot",
+      "zh": "热",
+      "ta": "சூடு",
+      "ja": "暑い"
     },
     "Dia": {
       "en": "He / She",
@@ -396,11 +396,11 @@
       "ta": "கிளினிக்",
       "ja": "クリニック"
     },
-    "Benda": {
-      "en": "Thing",
-      "zh": "东西",
-      "ta": "பொருள்",
-      "ja": "物"
+    "Besar": {
+      "en": "Big",
+      "zh": "大",
+      "ta": "பெரிய",
+      "ja": "大きい"
     },
     "Lima": {
       "en": "Five",
@@ -408,11 +408,11 @@
       "ta": "ஐந்து",
       "ja": "五"
     },
-    "Doktor": {
-      "en": "Doctor",
-      "zh": "医生",
-      "ta": "மருத்துவர்",
-      "ja": "医者"
+    "Assalamualaikum": {
+      "en": "Assalamualaikum (peace be upon you)",
+      "zh": "愿你平安",
+      "ta": "உங்களுக்கு சாந்தி உண்டாகட்டும்",
+      "ja": "アッサラームアライクム"
     },
     "Bila": {
       "en": "When",
@@ -438,11 +438,11 @@
       "ta": "நிறுத்து",
       "ja": "止まる"
     },
-    "Hilang": {
-      "en": "Lost",
-      "zh": "丢失",
-      "ta": "தொலைந்தது",
-      "ja": "なくした"
+    "Bagaimana": {
+      "en": "How",
+      "zh": "怎么样",
+      "ta": "எப்படி",
+      "ja": "どのように"
     },
     "Pagi": {
       "en": "Morning",
@@ -558,11 +558,11 @@
       "ta": "குடி",
       "ja": "飲む"
     },
-    "Tidak Sihat": {
-      "en": "Unhealthy",
-      "zh": "不健康",
-      "ta": "ஆரோக்கியமற்ற",
-      "ja": "体調が悪い"
+    "Sejuk": {
+      "en": "Cold",
+      "zh": "冷",
+      "ta": "குளிர்",
+      "ja": "寒い"
     },
     "Malam": {
       "en": "Night",
@@ -624,11 +624,11 @@
       "ta": "காவல்துறை",
       "ja": "警察"
     },
-    "Tak tahu": {
-      "en": "Don't know",
-      "zh": "不知道",
-      "ta": "தெரியாது",
-      "ja": "わからない"
+    "Fikir": {
+      "en": "Think",
+      "zh": "想",
+      "ta": "யோசி",
+      "ja": "考える"
     },
     "Faham": {
       "en": "Understand",
@@ -636,11 +636,11 @@
       "ta": "புரிகிறது",
       "ja": "わかる"
     },
-    "Sakit perut": {
-      "en": "Stomachache",
-      "zh": "肚子痛",
-      "ta": "வயிற்று வலி",
-      "ja": "腹痛"
+    "Lapar": {
+      "en": "Hungry",
+      "zh": "饿",
+      "ta": "பசி",
+      "ja": "お腹がすいた"
     },
     "Petang": {
       "en": "Afternoon",
