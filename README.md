@@ -4,8 +4,8 @@
 
 ### 🚀 Try it Live
 
-- **App link:** _(Google Drive link — to be added)_
-- **Repository:** https://github.com/tjh3281/kotoSay
+[![Download APK](https://img.shields.io/badge/Download_APK_v1.0.0-kotoSay-2ea44f?style=for-the-badge&logo=android)](https://github.com/tjh3281/kotoSay/releases/download/v1.0.0-on-publish/kotoSay_v1.0.0.apk)
+[![Repository](https://img.shields.io/badge/GitHub-tjh3281%2FkotoSay-181717?style=for-the-badge&logo=github)](https://github.com/tjh3281/kotoSay)
 
 _(Note: Ensure you allow "Install from unknown sources" on your Android device to install the prototype)._
 
